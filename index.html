@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="img/xw.png" type="image/x-icon" />
+    <meta charset="UTF-8">
+
+    <title>XiaWei</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="css/darkmode.css">
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/style.min.css"> -->
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css"> -->
+
+    <link rel="stylesheet" href="css/tabs.css" />
+</head>
+
+<body>
+
+    <div id="app">加载中。。。</div>
+
+
+    <!-- 配置文件 -->
+    <script src="js/docsify.js"></script>
+    <!-- 一键拷贝 -->
+    <script src="//unpkg.zhimg.com/docsify-copy-code"></script>
+
+    <!-- 封面 -->
+
+
+    <!-- emoji -->
+    <!-- <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+
+    <!-- 搜索 -->
+    <script src="//unpkg.zhimg.com/docsify/lib/plugins/search.js"></script>
+    <script src="//unpkg.zhimg.com/docsify@4.10.2/lib/docsify.min.js"></script>
+
+    <!-- 字数统计 -->
+    <script src="//unpkg.zhimg.com/docsify-count/dist/countable.js"></script>
+
+    <!-- 黑色主题 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/index.min.js"></script>
+
+    <!-- 代码高亮 -->
+    <script src="//unpkg.zhimg.com/prismjs/components/prism-c.js"></script>
+    <script src="//unpkg.zhimg.com/prismjs/components/prism-sql.js"></script>
+    <script src="//unpkg.zhimg.com/prismjs/components/prism-bash.js"></script>
+    <script src="//unpkg.zhimg.com/prismjs/components/prism-cpp.js"></script>
+    <script src="//unpkg.zhimg.com/prismjs/components/prism-python.js"></script>
+
+    <!-- latex -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+
+    <!-- gittalk -->
+    <script src="js/md5.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
+    <script src="js/gitalk.js"></script>
+
+    <!-- 分页导航 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+
+    <!-- tabs -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+    <style>
+         :root {
+            --docsifytabs-border-color: #ededed;
+            --docsifytabs-tab-highlight-color: #007ec6;
+        }
+    </style>
+
+    <!-- pdf插件 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>
+    <script src="//unpkg.com/docsify-pdf-embed-plugin/src/docsify-pdf-embed.js"></script>
+
+    <!-- 回到顶部 -->
+    <script src="js/top.js"></script>
+    <script src="js/top.goup.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.goup({
+                trigger: 100,
+                bottomOffset: 32,
+                locationOffset: 32,
+                // title: 'TOP',
+                titleAsText: true
+            });
+        });
+    </script>
+
+    <!-- 离线 -->
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('js/sw')
+        }
+    </script>
+
+    <!-- 爱心 -->
+    <script src="js/love.js"></script>
+
+</body>
+
+</html>
