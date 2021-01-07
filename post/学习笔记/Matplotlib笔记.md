@@ -690,6 +690,384 @@ ani = animation.FuncAnimation(fig=fig, func=animate, frames=100, init_func=init,
 plt.show()
 ```
 
-
 ![png](img/matplotlib/output_34_0.png)
+
+
+
+## 01-Matplotlib初识
+
+```python
+import matplotlib.pyplot as plt
+
+# 1, 创建figure对象
+fig = plt.figure(figsize=(20, 8), dpi=60)
+
+# 2, 利用fig对象创建子图， 一个fig对象可以包含多个子图
+# 2.1， 使用fig.add_subplot()函数创建子图axes对象， 这个函数接收三个参数，
+#  add_subplot(num_rows, num_cols, plot_num)
+#  如果num_rows + num_cols + plot_num < 10, 那么下列的写法可以省略
+# axes_1 = fig.add_subplot(1, 2, 1)
+# axes_2 = fig.add_subplot(1, 2, 2)
+# fig对象包含两个子图axes1， axes2， 构成1*2排列方式
+# axes_1 = fig.add_subplot(121)
+# axes_2 = fig.add_subplot(122)
+
+# 构成2*1
+# axes_1 = fig.add_subplot(211)
+# axes_2 = fig.add_subplot(212)
+
+# 有三个子图， 上边两个，  下一个
+# axes_1 = fig.add_subplot(221)
+# axes_2 = fig.add_subplot(222)
+# axes_3 = fig.add_subplot(212)
+
+# 有4个子图 ， 左边2个上下排列，  右边排一个，  最下方排一个
+axes_1 = fig.add_subplot(321)
+axes_2 = fig.add_subplot(323)
+axes_3 = fig.add_subplot(222)
+axes_4 = fig.add_subplot(313)
+
+# 3, 利用子图对象绘制一个折线图
+axes_1.plot([1,2,1,2,-1])
+axes_2.plot([0.5, 0.2, -0.4, -0.5])
+axes_3.plot([1,2,1,2,-1])
+axes_4.plot([0.5, 0.2, -0.4, -0.5])
+
+
+plt.show()
+```
+
+## 02-Axes子图
+
+```python
+import matplotlib.pyplot as plt
+
+
+# 1  设置figure
+plt.figure(figsize=(20,10), dpi = 60)
+# 1,1   设置显示中文
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
+# 绘制子图
+plt.subplot(211)
+plt.title("时间和速度的关系图")
+# 将x轴当做时间， 
+plt.xlabel("时间")
+# 设置y轴的label
+plt.ylabel("速度")
+
+# 第二个子图
+plt.subplot(212)
+# 设置标题
+plt.title("时间和加速度的关系")
+# x轴
+plt.xlabel("时间")
+# y轴
+plt.ylabel("加速度")
+
+# 绘制
+plt.show()
+```
+
+## 03-绘制图并设置坐标轴
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# 1, 创建一个ndarray  0-0.99
+data = np.arange(0, 1, 0.01)
+
+# 2, 设置figure
+plt.figure(figsize=(20,10))
+# 3, 设置标题
+plt.title("line ex")
+# 4, 设置坐标轴
+plt.xlabel('x')
+plt.ylabel('y')
+
+# 5,限制坐标轴刻度
+plt.xlim(0,1)
+plt.ylim(0,1)
+
+# 6, 设置刻度数据
+plt.xticks([0,0.3,0.6,0.9,1])
+plt.yticks([0,0.2,0.4,0.6,0.8,1])
+
+# 7 绘制
+plt.plot(data, data ** 2, label = 'y = x^2')
+# 追加绘制
+plt.plot(data, data ** 3, label = 'y = x^3')
+
+# 加上网格
+plt.grid()
+
+# 加上图示   方式一直直接通过legend函数来渲染图示
+# plt.legend(['y = x^2', 'y = x^3'])
+
+# 如果图形过多 ， 可以在绘制图形时指定label， 然后再渲染
+plt.legend()
+
+# 显示
+plt.show()
+```
+
+## 04-心率练习图
+
+```python
+import matplotlib as mp
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+#  显示用户可选参数
+# print(mp.rc_params())
+# 拖过plt.rcParams设置是全局设置，会影响当前fig对象中的所有axes对象中的所有绘制的图
+# 通过中午可显示
+plt.rcParams['font.sans-serif'] = ['SimHei']
+# 设置字体大小
+plt.rcParams['font.size'] = 11
+
+plt.figure(figsize=(20, 8),dpi=60)
+
+# x  轴
+x_show = [f'10点{i}分' for i in range(60)]
+# y  轴
+y_data = [random.randint(60,101) for i in range(60)]
+x_old = range(1,61)
+
+# 设置刻度
+plt.xticks(list(x_old)[::2], x_show[::2], rotation=45)
+plt.yticks(range(60,101))
+
+plt.title("心率变化图")
+plt.xlabel('时间')
+plt.ylabel('心率')
+
+# 绘制
+plt.plot(x_old, y_data, marker='o')
+
+plt.grid()
+
+plt.show()
+
+```
+
+
+
+```
+
+```
+
+## 05-绘制三角函数
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# 准备数据
+data = np.arange(0, np.pi * 2, 0.01)
+# print(data)
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+# 创建figure对象
+fig = plt.figure(figsize=(10, 9), dpi=60)
+# 添加子图axes1
+axes_sin = fig.add_subplot(211)
+axes_cos = fig.add_subplot(212)
+# 标题
+plt.title("三角函数曲线图示")
+# x 轴
+plt.xlabel('X')
+plt.ylabel('Y')
+# 限制y轴值
+plt.ylim(-1, 1)
+# 限制x轴值
+plt.xlim(0, np.pi * 2)
+# 调整刻度
+plt.xticks([0, np.pi/2, np.pi, np.pi*3/2, np.pi*2])
+plt.yticks([-1, -0.5, 0, 0.5, 1])
+#绘制
+axes_sin.plot(data, np.sin(data), label='sin')
+axes_cos.plot(data, np.cos(data), label='cos')
+# 渲染
+plt.legend()
+plt.show()
+
+
+
+# axes1_tan = fig.add_subplot(223)
+# axes1_cot = fig.add_subplot(224)
+
+
+```
+
+## 06-全局设置和axes设置
+
+```python
+import matplotlib as mp
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+#  显示用户可选参数
+# print(mp.rc_params())
+# 拖过plt.rcParams设置是全局设置，会影响当前fig对象中的所有axes对象中的所有绘制的图
+# 通过中文可显示
+plt.rcParams['font.sans-serif'] = ['SimHei']
+# 设置字体大小
+plt.rcParams['font.size'] = 11
+
+
+plt.figure(figsize=(20, 8),dpi=60)
+
+# x  轴
+x_show = [f'10点{i}分' for i in range(60)]
+# y  轴
+y_data = [random.randint(60,101) for i in range(60)]
+y_data2 = [random.randint(40,120) for i in range(60)]
+x_old = range(1,61)
+
+# 设置刻度
+plt.xticks(list(x_old)[::2], x_show[::2], rotation=45)
+plt.yticks(range(60,101))
+
+plt.title("心率变化图")
+plt.xlabel('时间')
+plt.ylabel('心率')
+
+# 绘制
+# 可以对需要的绘制样式进行设置   alpha 透明度  
+plt.plot(x_old, y_data, marker='o', markersize=4, linestyle='-', color='g', alpha=1)
+plt.plot(x_old, y_data2, marker='8', markersize=5, linestyle='-', color='m')
+
+
+plt.grid()
+plt.show()
+
+```
+
+## 07-填充函数
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 生成数据
+x = np.linspace(0, 1, 500)
+y = np.sin(3 * np.pi * x)
+
+# 绘制
+fig, ax = plt.subplots()
+plt.plot(x, y)
+
+
+# 第一种填充方式
+# plt.fill_between(x, 0, y, facecolor='g', alpha=0.3)
+# plt.fill_between(x[15:200], 0, 0.5, facecolor='r', alpha=0.9)
+
+# 第二种填充方式
+plt.fill(x, y)
+
+# 显示
+plt.show()
+```
+
+## 08-绘制散点图
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('散点图')
+
+ax = plt.subplot(111)
+
+# # 数据
+# x = np.arange(1, 30)
+# y = np.sin(x)
+
+# # 子图
+# ax1 = plt.subplot(111)
+
+# # 绘制散点图
+# # linewidths 缺省参数是根据x的值来设置大小
+# ax1.scatter(x, y, color='r', linewidths=x)
+
+# # 显示
+# plt.show()
+
+# ----------------------绘制多个散点图
+for color in ['red', 'blue', 'green']:
+    # 定义散点数量
+    count = 500
+    # 随机生成符合正态分布的点
+    x, y = np.random.randn(2, count)
+    # 绘制
+    ax.scatter(x, y, color=color, alpha=0.3, label=color)
+    ax.grid()
+    ax.legend()
+
+plt.show()
+```
+
+## 09-绘制饼图
+
+```python
+import matplotlib.pyplot as plt
+
+# 设置fig
+plt.figure(figsize=(6,6))
+
+# 显示坐标系
+plt.tick_params(labelsize=10)
+# 设置饼的位置
+plt.axes([0.1, 0.1, 0.8, 0.8])
+
+# 饼图每一份标签
+labels = ['python', 'c', 'js', 'go']
+# 饼图的每一份所占的比例
+x = [40, 15, 15, 30]
+# 饼图的每份偏移量
+explode = [0, 0, 0, 0.1]
+
+# 绘制饼图
+plt.pie(x, labels=labels, autopct='%1.1f%%', explode=explode)
+# 显示
+plt.show()
+```
+
+## 10-绘制柱状图（直方图）
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 创建fig
+# plt.figure()
+# plt.subplots()
+# plt.subplot()
+
+fig, ax = plt.subplots(2, 1)
+
+# 准备数据
+data = pd.Series(np.random.randn(8), index=list('abcdefgh'))
+# 直接使用pandas中的series对象来绘制图
+data.plot.bar(ax = ax[0], color='r', alpha=0.7)
+data.plot.bar(ax = ax[1], color='g', alpha=0.7)
+
+# 显示
+plt.show()
+```
 

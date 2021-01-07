@@ -22,8 +22,15 @@ select 100;
 # 查询表达式
 select 100%97;
 
+#批量添加
+insert into user(name) select ename from emp where sal>=3000;
+
 # 查询函数
 select version();
+
+#查询表结构
+#DESCRIBE tablename
+DESCRIBE EMP
 
 # 查询结果起别名
 select last_name as '姓', first_name as '名' from employees;
@@ -144,13 +151,21 @@ select * from employees order by salary asc,employee_id desc;
    ```sql
    # 字符函数
    select length(’john‘);
+   select char_length("我123")
    
    # 拼接字符串
    select concat(last_name, '_', first_name) from employees;
    
+   #插入字符串(原字符串，位置，长度，插入的字符串)
+   select insert('1234',1,2,'aaa')
+   
    # 大小写转换
    select upper(last_name) from employees;
    select lower("joHn");
+   
+   #返回字符串
+   #返回最左边指定长度的内容
+   select left('123456',3)
    
    # 截取字符串，索引从1开始
    # 从指定位置开始截取到末尾
@@ -164,18 +179,26 @@ select * from employees order by salary asc,employee_id desc;
    
    # 删除前后字符
    # 删除空格
+   select ltrim('         123'); // 123
    select length(trim('   你好   ')) as out_put; // 6
    
    # 删除指定字符
-   select trim('a' from 'aaaa你好aaaa你aaaaa') as out_put;
+   select trim('a' from 'aaaa你好aaaa你aaaaa') as out_put; //  你好aaaa你
    select trim('ab' from 'aba你好babab') as out_put; // a你好b
    
    # 填充字符
    select lpad("hello", 10, '*');
    select rpad("hello", 10, '*');
    
+   #重复
+   select repeat('123',4)  // 123123123123
+   
    # 替换
-   select replace("I love U U U...", 'U', 'you');
+   select replace("I love U U U...", 'U', 'you'); 
+   // I love you you you...
+   
+   #截断
+   select substring('123456',2,3) // 234
    ```
 
 2. 数学函数
@@ -184,6 +207,9 @@ select * from employees order by salary asc,employee_id desc;
    # 四舍五入
    select round(1.55);
    select round(1.55, 1);
+   
+   #随机数
+   select RAND()
    
    # 向上取整
    select ceil(1.01);
@@ -231,12 +257,28 @@ select * from employees order by salary asc,employee_id desc;
    select monthname(now()) 月;
    select day(now()) 日;
    
+   #返回两个日期之间的时间差
+   select timediff('2020-12-2 12:00:00','2020-12-2 11:00:00')
+   #返回两个日期之间的天数差
+   select datediff('2020-12-2','2020-11-2')
+   
+   #加一个时间间隔
+   select DATE_ADD(date,INTERVAL expr unit)
+   
    # 字符串转日期
    select * from employees where hiredate = '1992-4-3';
    select * from employees where hiredate = str_to_date('4-3 1992', '%c-%d %Y');
    
    # 日期转字符串
    select date_format(now(), "%y年%m月%d日") as out_out;
+   
+   #格式化
+   select DATE_FORMAT(now(),'%y年%m月%d日')
+   
+   #日期在一周中的第几天 美国制
+   select DAYOFWEEK('2020-12-2')
+   select DAYOFmonth('2020-12-2')
+   select DAYOFyear('2020-12-2')
    ```
 
 4. 其他函数
@@ -250,6 +292,10 @@ select * from employees order by salary asc,employee_id desc;
    
    # 查看用户
    select user();
+   
+   # 密码加密
+   password(str)
+   Md5(str)
    
    ```
 
@@ -465,7 +511,7 @@ from 表1 别名 连接类型 join 表2 别名 on 连接条件
 
    - 全外连接（full outer）
 
-3. 交叉连接（cross）
+3. 交叉连接（cross）无效连接
 
    交叉就是笛卡尔积
 
